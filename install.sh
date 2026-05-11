@@ -1,11 +1,15 @@
 #!/bin/bash
 
 check_package() {
-    if ! pacman -Qs "$1" >/dev/null 2>&1; then
-        echo "$1 is not installed. Installing $1..."
-        sudo pacman -S --noconfirm "$1"
+    if ! "$1" -Qs "$2" >/dev/null 2>&1; then
+        echo "$2 is not installed. Installing $2..."
+        if [ "$1" = "yay" ]; then
+            "$1" -S --noconfirm --needed "$2"
+        else
+            sudo "$1" -S --noconfirm --needed "$2"
+        fi
     else
-        echo "$1 is already installed."
+        echo "$2 is already installed."
     fi
 }
 
@@ -23,10 +27,14 @@ install_yay() {
 }
 
 install_yay
-check_package "hyprland"
-check_package "waybar"
-check_package "rofi"
-check_package "thunar"
-check_package "kitty"
-check_package "firefox"
-check_package "blueman"
+check_package "pacman" "hyprland"
+check_package "pacman" "waybar"
+check_package "pacman" "rofi"
+check_package "pacman" "thunar"
+check_package "pacman" "kitty"
+check_package "pacman" "firefox"
+check_package "pacman" "blueman"
+check_package "pacman" "pavucontrol"
+check_package "pacman" "baobab"
+
+cp config/* ~/.config/hypr/
