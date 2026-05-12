@@ -37,4 +37,7 @@ check_package "pacman" "blueman"
 check_package "pacman" "pavucontrol"
 check_package "pacman" "baobab"
 
-cp config/* ~/.config/hypr/
+mkdir -p ~/.config/hypr ~/.config/waybar
+
+cp config/hypr/* ~/.config/hypr/
+cp config/waybar/* ~/.config/waybar/
